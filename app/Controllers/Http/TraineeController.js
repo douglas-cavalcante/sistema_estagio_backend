@@ -77,7 +77,7 @@ class TraineeController {
     } catch (error) {
       return response
         .status(error.status)
-        .send({ error: { message: 'task nao encontrada' } })
+        .send({ error: { message: 'Estagiário nao encontrado' } })
     }
   }
 }
