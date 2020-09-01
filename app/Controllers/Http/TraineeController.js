@@ -5,7 +5,7 @@ const Trainee = use('App/Models/Trainee')
 class TraineeController {
 
   async index() {
-    const trainees = await Trainee.all();
+    const trainees = await Trainee.query().fetch();
     return trainees;
   }
 
