@@ -13,13 +13,17 @@ class CompanyController {
     const data = request.only([
       'cnpj',
       'company_name',
+      'contact',
       'cep',
       'address',
       'neighborhood',
       'city',
       'state',
       'number',
-      'complement'
+      'complement',
+      'rh_analyst',  
+       'supervisor'
+
     ]);
 
     const company = await Company.create(data);
