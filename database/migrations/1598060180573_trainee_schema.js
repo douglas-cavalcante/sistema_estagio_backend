@@ -6,7 +6,7 @@ class TraineeSchema extends Schema {
   up() {
     this.create('trainees', (table) => {
       table.increments()
-      table.string('cpf', 11).notNullable().unique()
+      table.string('cpf').notNullable().unique()
       table.string('name').notNullable()
       table.string('rg')
       table.string('primary_phone_contact')
@@ -22,8 +22,7 @@ class TraineeSchema extends Schema {
       table.string('complement')
       table.string('father_name')
       table.string('mother_name')
-      table.boolean('has_eficiency').defaultTo(false)
-      table.date('admission_date')
+      table.boolean('have_special_needs').defaultTo(false)
       table.timestamps()
     })
   }

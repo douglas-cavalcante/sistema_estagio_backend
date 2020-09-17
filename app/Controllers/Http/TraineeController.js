@@ -66,7 +66,7 @@ class TraineeController {
         'complement',
         'father_name',
         'mother_name',
-        'has_eficiency',
+        'have_special_needs',
         'admission_date',
       ]);
 
