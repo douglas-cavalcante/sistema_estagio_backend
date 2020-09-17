@@ -21,9 +21,10 @@ class CompanyController {
       'state',
       'number',
       'complement',
-      'rh_analyst',  
-       'supervisor'
-
+      'rh_analyst',
+      'supervisor',
+      'integration_agent_value',
+      'institution_value'
     ]);
 
     const company = await Company.create(data);
@@ -53,7 +54,9 @@ class CompanyController {
         'city',
         'state',
         'number',
-        'complement'
+        'complement',
+        'integration_agent_value',
+        'institution_value'
       ]);
 
       company.merge(data)
