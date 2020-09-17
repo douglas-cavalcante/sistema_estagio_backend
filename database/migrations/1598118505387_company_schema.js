@@ -18,6 +18,8 @@ class CompanySchema extends Schema {
       table.string('complement')
       table.string('rh_analyst')
       table.string('supervisor')
+      table.float('integration_agent_value')
+      table.float('institution_value')
       table.timestamps()
     })
   }
