@@ -48,6 +48,7 @@ class CompanyController {
       const data = request.only([
         'cnpj',
         'company_name',
+        'contact',
         'cep',
         'address',
         'neighborhood',
@@ -55,6 +56,8 @@ class CompanyController {
         'state',
         'number',
         'complement',
+        'rh_analyst',
+        'supervisor',
         'integration_agent_value',
         'institution_value'
       ]);

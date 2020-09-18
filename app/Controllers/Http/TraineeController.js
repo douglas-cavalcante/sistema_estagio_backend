@@ -27,8 +27,7 @@ class TraineeController {
       'complement',
       'father_name',
       'mother_name',
-      'has_eficiency',
-      'admission_date',
+      'have_special_needs',
     ]);
 
     const trainee = await Trainee.create(data);
@@ -67,7 +66,6 @@ class TraineeController {
         'father_name',
         'mother_name',
         'have_special_needs',
-        'admission_date',
       ]);
 
       trainee.merge(data)
