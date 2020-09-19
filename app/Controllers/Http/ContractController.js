@@ -1,6 +1,7 @@
 'use strict'
 
 const Contract = use('App/Models/Contract')
+const Company = use('App/Models/Company')
 
 class ContractController {
 
@@ -30,10 +31,16 @@ class ContractController {
       'internship_scholarship_value',
       'transportation_assistance_value',
       'duration',
-      'work_activities',
+      'work_activities'
     ])
 
-    const contract = await Contract.create(data);
+    const company = await Company.findOrFail(data.company_id);
+    
+    const contract = await Contract.create({
+      integration_agent_value_company: company.integration_agent_value,
+      institution_value_company: company.institution_value,
+      ...data,
+    });
 
     return contract;
   }
