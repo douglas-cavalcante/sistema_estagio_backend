@@ -18,6 +18,8 @@ class ContractSchema extends Schema {
       table.string('reason_shutdown')
       table.date('date_shutdown')
       table.boolean('status').defaultTo(true)
+      table.float('integration_agent_value_company')
+      table.float('institution_value_company')
       table.timestamps()
     })
   }
