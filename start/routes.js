@@ -6,7 +6,7 @@ const Route = use('Route');
 Route.post('/users', 'UserController.store');
 
 Route.post('/sessions', 'SessionController.store');
-
+Route.post('/trainees', 'TraineeController.store');
 /* Rotas privadas */
 
 Route.group(() => {
@@ -16,7 +16,7 @@ Route.group(() => {
 
   Route.get('/trainees', 'TraineeController.index');
   Route.get('/trainees/:id', 'TraineeController.show');
-  Route.post('/trainees', 'TraineeController.store');
+ 
   Route.put('/trainees/:id', 'TraineeController.update');
 
   Route.get('/companies', 'CompanyController.index');
