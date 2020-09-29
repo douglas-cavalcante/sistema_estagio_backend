@@ -10,6 +10,10 @@ Route.post('/trainees', 'TraineeController.store');
 
 Route.get('/courses', 'CourseController.index');
 Route.post('/courses', 'CourseController.store');
+
+Route.get('/educational_institutions', 'EducationalInstitutionController.index');
+Route.post('/educational_institutions', 'EducationalInstitutionController.store');
+
 /* Rotas privadas */
 
 Route.group(() => {

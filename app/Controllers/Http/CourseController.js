@@ -1,7 +1,6 @@
 'use strict'
 
 const Course = use('App/Models/Course')
-
 class CourseController {
 
   async index() {

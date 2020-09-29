@@ -11,6 +11,14 @@ class Contract extends Model {
   trainee () {
     return this.belongsTo('App/Models/Trainee')
   }
+
+  course () {
+    return this.belongsTo('App/Models/Course')
+  }
+
+  educationalInstitution () {
+    return this.belongsTo('App/Models/EducationalInstitution')
+  }
 }
 
 module.exports = Contract
