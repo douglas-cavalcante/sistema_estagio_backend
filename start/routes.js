@@ -10,6 +10,8 @@ Route.post('/trainees', 'TraineeController.store');
 
 Route.get('/courses', 'CourseController.index');
 Route.post('/courses', 'CourseController.store');
+Route.get('/courses/:id', 'CourseController.show');
+Route.put('/courses/:id', 'CourseController.update');
 
 Route.get('/educational_institutions', 'EducationalInstitutionController.index');
 Route.post('/educational_institutions', 'EducationalInstitutionController.store');

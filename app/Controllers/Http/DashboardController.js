@@ -32,7 +32,7 @@ class DashboardController {
 
     const actives_contracts = await Contract
     .query()
-    .whereRaw("EXTRACT(month from date_shutdown) = ? AND EXTRACT(year from date_shutdown) = ?", [data.month, data.year])
+    .whereRaw("EXTRACT(month from start_validity) = ? AND EXTRACT(year from start_validity) = ?", [data.month, data.year])
     .where('status',true)
     .getCount();
 
