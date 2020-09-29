@@ -7,6 +7,9 @@ Route.post('/users', 'UserController.store');
 
 Route.post('/sessions', 'SessionController.store');
 Route.post('/trainees', 'TraineeController.store');
+
+Route.get('/courses', 'CourseController.index');
+Route.post('/courses', 'CourseController.store');
 /* Rotas privadas */
 
 Route.group(() => {
