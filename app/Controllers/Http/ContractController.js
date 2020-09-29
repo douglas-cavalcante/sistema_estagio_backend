@@ -8,7 +8,7 @@ class ContractController {
   async index({ request }) {
     const data = request.get();
 
-    const contractQuery = Contract.query().with('company').with('trainee').with('course').with('educationalInstitution');
+    const contractQuery = Contract.query().with('company').with('trainee').with('course').with('educational_institution');
     
     if (data.company_id) {
       contractQuery.where("company_id", data.company_id);

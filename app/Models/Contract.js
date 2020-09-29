@@ -16,7 +16,7 @@ class Contract extends Model {
     return this.belongsTo('App/Models/Course')
   }
 
-  educationalInstitution () {
+  educational_institution () {
     return this.belongsTo('App/Models/EducationalInstitution')
   }
 }
