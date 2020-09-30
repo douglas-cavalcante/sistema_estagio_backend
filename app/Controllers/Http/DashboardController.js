@@ -20,7 +20,7 @@ class DashboardController {
 
     const total_contracts = await Contract
     .query()
-    .whereRaw("EXTRACT(month from date_shutdown) = ? AND EXTRACT(year from date_shutdown) = ?", [data.month, data.year])
+    .where('status',true)
     .getCount();
 
 

@@ -9,11 +9,11 @@ class ContractController {
     const data = request.get();
 
     const contractQuery = Contract.query().with('company').with('trainee').with('course').with('educational_institution');
-    
+
     if (data.company_id) {
       contractQuery.where("company_id", data.company_id);
     }
-  
+
     if (data.date_start && data.date_end) {
       contractQuery.whereBetween("start_validity", [data.date_start, data.date_end]);
     }
@@ -37,7 +37,7 @@ class ContractController {
     ])
 
     const company = await Company.findOrFail(data.company_id);
-    
+
     const contract = await Contract.create({
       integration_agent_value_company: company.integration_agent_value,
       institution_value_company: company.institution_value,
@@ -47,11 +47,49 @@ class ContractController {
     return contract;
   }
 
-  async show({ params, request, response, view }) {
+  async show({ params, response }) {
+    try {
+      const contract = await Contract
+        .query()
+        .with('company')
+        .with('trainee')
+        .with('course')
+        .with('educational_institution')
+        .where('id', params.id)
+        .firstOrFail();
+      return contract
+    } catch (error) {
+      return response
+        .status(error.status)
+        .send({ error: { message: 'Contrato não encontrado' } })
+    }
   }
 
+  async update ({ params, request, response }) {
+    try {
+      const contract = await Contract.findOrFail(params.id)
+      const data = request.only([
+        'trainee_id',
+        'company_id',
+        'start_validity',
+        'end_validity',
+        'internship_scholarship_value',
+        'transportation_assistance_value',
+        'duration',
+        'work_activities',
+        'educational_institution_id',
+        'course_id',
+      ]);
 
-  async update({ params, request, response }) {
+      contract.merge(data)
+      contract.save()
+
+      return contract
+    } catch (error) {
+      return response
+        .status(error.status)
+        .send({ error: { message: 'Contrato nao encontrado' } })
+    }
   }
 
   async shutdown({ params, request, response }) {
