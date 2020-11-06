@@ -3,8 +3,11 @@
 const Observation = use('App/Models/Observation')
 
 class ObservationController {
-  async index() {
-    const observations = await Observation.all();
+
+  async index({request}) {
+    const data = request.get();
+
+    const observations = await Observation.query().where('trainee_id', data.trainee_id).fetch();
     return observations;
   }
 

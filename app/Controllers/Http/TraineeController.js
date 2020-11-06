@@ -4,9 +4,18 @@ const Trainee = use('App/Models/Trainee')
 
 class TraineeController {
 
-  async index() {
-    const trainees = await Trainee.query().with('contract').fetch();
-    return trainees;
+  async index({request}) {
+    const data = request.get();
+
+    const traineesQuery = Trainee.query().with('contract');
+    
+    if (data.cpf) {
+      traineesQuery.where("cpf", data.cpf);
+    }
+
+    const result = await traineesQuery.fetch();
+    return result;
+
   }
 
   async store({ request }) {
@@ -14,6 +23,7 @@ class TraineeController {
       'cpf',
       'name',
       'rg',
+      'insurance_number',
       'primary_phone_contact',
       'secondary_phone_contact',
       'gender',
@@ -53,6 +63,7 @@ class TraineeController {
         'cpf',
         'name',
         'rg',
+        'insurance_number',
         'primary_phone_contact',
         'secondary_phone_contact',
         'gender',
