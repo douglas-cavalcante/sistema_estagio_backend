@@ -112,6 +112,29 @@ class ContractController {
         .send({ error: { message: 'Contrato nao encontrado' } })
     }
   }
+
+
+  async reactive({ params, request, response }) {
+    try {
+      const contract = await Contract.findOrFail(params.id)
+      
+      const data = {
+        status: true,
+        reason_shutdown: '',
+        date_shutdown: null,
+
+      };
+
+      contract.merge(data)
+      contract.save()
+
+      return contract
+    } catch (error) {
+      return response
+        .status(error.status)
+        .send({ error: { message: 'Contrato nao encontrado' } })
+    }
+  }
 }
 
 module.exports = ContractController

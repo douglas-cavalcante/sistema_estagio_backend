@@ -38,6 +38,7 @@ Route.group(() => {
   Route.post('/observations', 'ObservationController.store');
   Route.put('/observations/:id', 'ObservationController.update');
 
+  Route.get('/contractExpirationReport', 'ContractExpirationReport.index');
 
   Route.get('/contracts', 'ContractController.index');
   Route.get('/contracts/:id', 'ContractController.show');
@@ -45,7 +46,11 @@ Route.group(() => {
   Route.put('/contracts/:id', 'ContractController.update');
 
   Route.put('/contracts/:id/shutdown', 'ContractController.shutdown');
+  Route.put('/contracts/:id/reactive', 'ContractController.reactive');
 
+  Route.get('/courseActivities', 'CourseActivityController.index');
+  Route.post('/courseActivities', 'CourseActivityController.store');
+ 
   Route.get('/reports/actives', 'ActiveContractController.index');
   Route.get('/reports/inactives', 'InactiveContractController.index');
 

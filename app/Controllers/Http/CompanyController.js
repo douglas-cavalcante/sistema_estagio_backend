@@ -5,7 +5,13 @@ const Company = use('App/Models/Company')
 
 class CompanyController {
   async index() {
-    const companies = await Company.all();
+    const companies = await Company
+    .query()
+    .withCount('contracts as qtd_contracts_actives', (builder) => {
+      builder.where('status', true)
+    })
+    .fetch();
+
     return companies;
   }
 
@@ -24,7 +30,8 @@ class CompanyController {
       'rh_analyst',
       'supervisor',
       'integration_agent_value',
-      'institution_value'
+      'institution_value',
+      'agreement_start_date'
     ]);
 
     const company = await Company.create(data);
@@ -59,7 +66,8 @@ class CompanyController {
         'rh_analyst',
         'supervisor',
         'integration_agent_value',
-        'institution_value'
+        'institution_value',
+        'agreement_start_date'
       ]);
 
       company.merge(data)
