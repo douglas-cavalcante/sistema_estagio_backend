@@ -23,7 +23,6 @@ class TraineeController {
       'cpf',
       'name',
       'rg',
-      'insurance_number',
       'primary_phone_contact',
       'secondary_phone_contact',
       'gender',
