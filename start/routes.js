@@ -40,6 +40,12 @@ Route.group(() => {
 
   Route.get('/contractExpirationReport', 'ContractExpirationReport.index');
 
+  Route.get('/checklistTrainee', 'ChecklistTraineeController.index');
+  Route.post('/checklistTrainee', 'ChecklistTraineeController.store');
+  Route.put('/checklistTrainee/:id', 'ChecklistTraineeController.update');
+
+
+
   Route.get('/contracts', 'ContractController.index');
   Route.get('/contracts/:id', 'ContractController.show');
   Route.post('/contracts', 'ContractController.store');
