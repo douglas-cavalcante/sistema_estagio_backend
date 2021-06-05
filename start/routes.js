@@ -18,14 +18,20 @@ Route.post('/educational_institutions', 'EducationalInstitutionController.store'
 
 /* Rotas privadas */
 
+
+Route.post('/files', 'FileController.store')
+
 Route.group(() => {
 
 
-  Route.get('/dashboard', 'DashboardController.index');
+  Route.get('/files/:id', 'FileController.show')
 
+  Route.get('/trainees/documents', 'TraineeDocumentController.index');
+
+
+  Route.get('/dashboard', 'DashboardController.index');
   Route.get('/trainees', 'TraineeController.index');
   Route.get('/trainees/:id', 'TraineeController.show');
- 
   Route.put('/trainees/:id', 'TraineeController.update');
 
   Route.get('/companies', 'CompanyController.index');
@@ -56,7 +62,7 @@ Route.group(() => {
 
   Route.get('/courseActivities', 'CourseActivityController.index');
   Route.post('/courseActivities', 'CourseActivityController.store');
- 
+
   Route.get('/reports/actives', 'ActiveContractController.index');
   Route.get('/reports/inactives', 'InactiveContractController.index');
 

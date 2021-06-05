@@ -13,7 +13,7 @@ class Trainee extends Model {
     return Number(`${differenceInYears(new Date(), date_birth)}`);
   }
 
- 
+
   contract () {
     return this.hasOne('App/Models/Contract')
   }
