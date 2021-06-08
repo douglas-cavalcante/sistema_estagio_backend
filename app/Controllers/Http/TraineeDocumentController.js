@@ -2,37 +2,16 @@
 const TraineeDocument = use('App/Models/TraineeDocument')
 
 class TraineeDocumentController {
-
-
-  async index({ request, response, view }) {
+  async index({ request }) {
     const query = request.get();
 
     const result = TraineeDocument.query()
       .with('files')
       .where("trainee_id", query.trainee_id)
+      .orderBy('created_at', 'desc')
       .fetch()
 
     return result
-  }
-
-
-  async store({ request, response }) {
-    const data = request.get();
-    const traineeDocument = await TraineeDocument.create(data)
-    return traineeDocument;
-  }
-
-
-  async show({ params, request, response, view }) {
-
-  }
-
-  async update({ params, request, response }) {
-    
-  }
-
-
-  async destroy({ params, request, response }) {
   }
 }
 

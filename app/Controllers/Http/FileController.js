@@ -3,20 +3,12 @@
 const Drive = use('Drive');
 const File = use('App/Models/File')
 const TraineeDocument = use('App/Models/TraineeDocument')
-
-
 class FileController {
 
-  async index({ request, response, view }) {
-  }
-
   async store({ request, response }) {
-
-
     request.multipart.file('image', {}, async (file) => {
 
       try {
-
         const query = request.get();
 
         const ContentType = file.headers['content-type']
@@ -28,9 +20,7 @@ class FileController {
           ACL
         })
 
-
         if (query.type_upload === 'trainee_document_create') {
-
           const currentFile = await File.create({
             name: file.clientName,
             key: Key,
@@ -43,16 +33,13 @@ class FileController {
             trainee_id: query.trainee_id
           })
         } else if (query.type_upload === 'trainee_document_upload') {
-
-          console.log(query.file_id)
           const trainee_document = await File.find(query.file_id)
           trainee_document.name = file.clientName
           trainee_document.url = url
           trainee_document.key = Key
+          trainee_document.content_type = ContentType
           await trainee_document.save()
-
         }
-
       } catch (err) {
         return response.status(err.status).json({
           error: {
@@ -65,8 +52,6 @@ class FileController {
 
     await request.multipart.process();
 
-
-
   }
 
   async show({ params, request, response, view }) {
@@ -74,7 +59,6 @@ class FileController {
 
     try {
       const file = await File.findByOrFail('name', name)
-
 
       response.implicitEnd = false
       response.header('Content-Type', file.content_type)
@@ -84,7 +68,6 @@ class FileController {
 
 
     } catch (err) {
-
 
       return response.status(err.status).json({
         error: {
@@ -98,12 +81,6 @@ class FileController {
 
   }
 
-
-  async update({ params, request, response }) {
-  }
-
-  async destroy({ params, request, response }) {
-  }
 }
 
 module.exports = FileController
