@@ -19,7 +19,7 @@ class TraineeController {
 
   }
 
-  async store({ request }) {
+  async store({ request, response }) {
     const data = request.only([
       'cpf',
       'name',
@@ -40,6 +40,14 @@ class TraineeController {
       'have_special_needs',
       'email'
     ]);
+
+    const traineeExists = await Trainee.findBy({'cpf': data.cpf})
+
+    if(traineeExists) {
+      return response
+      .status(403)
+      .send({ error: 'Estágiario Já existe na base de dados'  })
+    }
 
     const trainee = await Trainee.create(data);
     return trainee;
