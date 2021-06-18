@@ -8,9 +8,10 @@ class TraineeController {
     const data = request.get();
 
     const traineesQuery = Trainee.query().with('contract');
-    
+
     if (data.cpf) {
-      traineesQuery.where("cpf", data.cpf);
+      traineesQuery.where("cpf", 'ilike', '%'+data.cpf+'%');
+      traineesQuery.orWhere("name", 'ilike', '%'+data.cpf+'%');
     }
 
     const result = await traineesQuery.fetch();

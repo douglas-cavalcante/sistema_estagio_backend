@@ -11,8 +11,7 @@ class Contract extends Model {
 
   getNumberDaysEndContract({ end_validity, }) {
     const numberDaysEndContract = differenceInCalendarDays(end_validity, new Date());
-    
-    console.log(numberDaysEndContract)
+
     return numberDaysEndContract
   }
 

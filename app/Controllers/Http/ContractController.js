@@ -8,10 +8,19 @@ class ContractController {
   async index({ request }) {
     const data = request.get();
 
-    const contractQuery = Contract.query().with('company').with('trainee').with('course').with('educational_institution');
+    const contractQuery = Contract
+    .query()
+    .with('company')
+    .with('trainee')
+    .with('course')
+    .with('educational_institution');
 
     if (data.company_id) {
       contractQuery.where("company_id", data.company_id);
+    }
+
+    if (data.status) {
+      contractQuery.where("status", data.status) ;
     }
 
     if (data.date_start && data.date_end) {
@@ -119,7 +128,7 @@ class ContractController {
   async reactive({ params, request, response }) {
     try {
       const contract = await Contract.findOrFail(params.id)
-      
+
       const data = {
         status: true,
         reason_shutdown: '',
