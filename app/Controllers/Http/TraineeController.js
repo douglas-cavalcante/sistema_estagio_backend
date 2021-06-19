@@ -4,14 +4,29 @@ const Trainee = use('App/Models/Trainee')
 
 class TraineeController {
 
-  async index({request}) {
+  async index({ request }) {
     const data = request.get();
+
+
+    if (data.default) {
+      const traineesQuery = Trainee
+        .query()
+        .whereDoesntHave('contract', (builder) => {
+          builder.where('status', false)
+        })
+        .fetch()
+
+
+      return traineesQuery;
+
+
+    }
 
     const traineesQuery = Trainee.query().with('contract');
 
     if (data.cpf) {
-      traineesQuery.where("cpf", 'ilike', '%'+data.cpf+'%');
-      traineesQuery.orWhere("name", 'ilike', '%'+data.cpf+'%');
+      traineesQuery.where("cpf", 'ilike', '%' + data.cpf + '%');
+      traineesQuery.orWhere("name", 'ilike', '%' + data.cpf + '%');
     }
 
     const result = await traineesQuery.fetch();
@@ -41,19 +56,19 @@ class TraineeController {
       'email'
     ]);
 
-    const traineeExists = await Trainee.findBy({'cpf': data.cpf})
+    const traineeExists = await Trainee.findBy({ 'cpf': data.cpf })
 
-    if(traineeExists) {
+    if (traineeExists) {
       return response
-      .status(403)
-      .send({ error: 'Estágiario Já existe na base de dados'  })
+        .status(403)
+        .send({ error: 'Estágiario Já existe na base de dados' })
     }
 
     const trainee = await Trainee.create(data);
     return trainee;
   }
 
-  async show ({ params, response }) {
+  async show({ params, response }) {
     try {
       const trainee = await Trainee.findOrFail(params.id)
       return trainee
@@ -64,7 +79,7 @@ class TraineeController {
     }
   }
 
-  async update ({ params, request, response }) {
+  async update({ params, request, response }) {
     try {
       const trainee = await Trainee.findOrFail(params.id)
       const data = request.only([
