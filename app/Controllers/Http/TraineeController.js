@@ -11,9 +11,7 @@ class TraineeController {
     if (data.default) {
       const traineesQuery = Trainee
         .query()
-        .whereDoesntHave('contract', (builder) => {
-          builder.where('status', false)
-        })
+        .doesntHave('contract')
         .fetch()
 
 
