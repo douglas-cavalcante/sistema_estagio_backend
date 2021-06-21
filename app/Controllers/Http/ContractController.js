@@ -15,6 +15,10 @@ class ContractController {
     .with('course')
     .with('educational_institution');
 
+    if (data.trainee_id) {
+      contractQuery.where("trainee_id", data.trainee_id);
+    }
+
     if (data.company_id) {
       contractQuery.where("company_id", data.company_id);
     }
