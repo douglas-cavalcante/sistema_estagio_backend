@@ -6,7 +6,14 @@ const TraineeDocument = use('App/Models/TraineeDocument')
 class FileController {
 
   async store({ request, response }) {
-    request.multipart.file('image', {}, async (file) => {
+
+    const validationOptions = {
+      types: ['image'],
+      size: '10mb',
+  };
+
+
+    request.multipart.file('image', validationOptions, async (file) => {
 
       try {
         const query = request.get();
@@ -17,7 +24,8 @@ class FileController {
 
         const url = await Drive.put(Key, file.stream, {
           ContentType,
-          ACL
+          ACL,
+
         })
 
         if (query.type_upload === 'trainee_document_create') {
