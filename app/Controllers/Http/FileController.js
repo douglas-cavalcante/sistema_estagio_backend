@@ -18,6 +18,7 @@ class FileController {
       try {
         const query = request.get();
 
+
         const ContentType = file.headers['content-type']
         const ACL = "public-read";
         const Key = `${(Math.random() * 100).toString(32)}-${file.clientName}`

@@ -4,20 +4,20 @@ const Observation = use('App/Models/Observation')
 
 class ObservationController {
 
-  async index({request}) {
+  async index({ request }) {
     const data = request.get();
 
-    const observations = await Observation.query().where('trainee_id', data.trainee_id).fetch();
+    const observations = await Observation.query().with('user').where('trainee_id', data.trainee_id).fetch();
     return observations;
   }
 
-  async store({ request }) {
+  async store({ request, auth }) {
     const data = request.only([
       'description',
       'trainee_id',
     ]);
 
-    const observation = await Observation.create(data);
+    const observation = await Observation.create({ ...data, user_id: auth.user.id });
     return observation;
   }
 
