@@ -29,6 +29,7 @@ Route.group(() => {
   Route.get('/trainees/attendance', 'AttendanceController.index')
   Route.post('/trainees/attendance', 'AttendanceController.store')
   Route.post('/trainees/attendanceManual', 'AttendanceManualController.store')
+  Route.patch('/trainees/attendanceManual/:id', 'AttendanceManualController.update')
 
   Route.get('/dashboard', 'DashboardController.index');
   Route.get('/trainees', 'TraineeController.index');

@@ -34,6 +34,9 @@ class AttendanceController {
   async store({ request, response }) {
 
     try {
+
+      const params = request.get();
+
       const file = request.file('file')
 
       await file.move(Helpers.tmpPath('uploads'), {
@@ -71,9 +74,15 @@ class AttendanceController {
         console.log(ordenedItems)
         await Attendance.findOrCreate({
           cpf: ordenedItems[0].cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
-          date: ordenedItems[0].date
+          date: ordenedItems[0].date,
+        },
+        {
+          cpf: ordenedItems[0].cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
+          date: ordenedItems[0].date,
+          type: params.type
         });
       });
+
     } catch (error) {
       return response
         .status(error.status)
