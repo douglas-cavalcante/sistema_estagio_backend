@@ -18,11 +18,9 @@ Route.post('/educational_institutions', 'EducationalInstitutionController.store'
 
 /* Rotas privadas */
 
-
 Route.post('/files', 'FileController.store')
 
 Route.group(() => {
-
 
   Route.get('/files/:id', 'FileController.show')
 
@@ -53,8 +51,6 @@ Route.group(() => {
   Route.post('/checklistTrainee', 'ChecklistTraineeController.store');
   Route.put('/checklistTrainee/:id', 'ChecklistTraineeController.update');
 
-
-
   Route.get('/contracts', 'ContractController.index');
   Route.get('/contracts/:id', 'ContractController.show');
   Route.post('/contracts', 'ContractController.store');
@@ -68,6 +64,7 @@ Route.group(() => {
 
   Route.get('/reports/actives', 'ActiveContractController.index');
   Route.get('/reports/inactives', 'InactiveContractController.index');
+  Route.get('/reports/financial', 'FinancialReportController.index');
 
 }).middleware(['auth']);
 

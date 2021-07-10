@@ -34,10 +34,7 @@ class AttendanceController {
   async store({ request, response }) {
 
     try {
-      const file = request.file('file', {
-        types: ['csv'],
-        size: '20mb'
-      })
+      const file = request.file('file')
 
       await file.move(Helpers.tmpPath('uploads'), {
         name: 'presencas-file.csv',
@@ -60,7 +57,7 @@ class AttendanceController {
         }
       })
 
-      const filterJSON = parseJSON.filter(item => item.cpf.length === 11)
+      const filterJSON = parseJSON.filter(item => item.cpf.length === 11 && item.date)
 
       const groupDocument = groupBy('cpf');
 
@@ -72,7 +69,6 @@ class AttendanceController {
         const currentData = data[key];
         const ordenedItems = currentData.slice().sort((a, b) => b.date - a.date)
         console.log(ordenedItems)
-        console.log('retornei')
         await Attendance.findOrCreate({
           cpf: ordenedItems[0].cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
           date: ordenedItems[0].date
@@ -83,8 +79,6 @@ class AttendanceController {
         .status(error.status)
         .send(error)
     }
-
-
   }
 
 }
