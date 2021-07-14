@@ -66,6 +66,7 @@ Route.group(() => {
   Route.get('/reports/actives', 'ActiveContractController.index');
   Route.get('/reports/inactives', 'InactiveContractController.index');
   Route.get('/reports/financial', 'FinancialReportController.index');
+  Route.get('/reports/attendances', 'AttendanceReportController.index');
 
 }).middleware(['auth']);
 

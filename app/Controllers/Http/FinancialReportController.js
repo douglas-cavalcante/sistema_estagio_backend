@@ -12,12 +12,9 @@ class FinancialReportController {
       .with('trainee')
       .where("status", true)
 
-
     if (data.company_id) {
       contractQueryActives.where("company_id", data.company_id);
     }
-
-    contractQueryActives.whereBetween("start_validity", [data.date_start, data.date_end]);
 
     const actives = await contractQueryActives.fetch();
 
@@ -30,9 +27,12 @@ class FinancialReportController {
       contractQueryInactives.where("company_id", data.company_id);
     }
 
-    contractQueryInactives.whereBetween("date_shutdown", [data.date_start_end_validity, data.date_end_end_validity]);
+
+    if (data.date_start_end_validity && data.date_end_end_validity) {
+      contractQueryInactives.whereBetween("date_shutdown", [data.date_start_end_validity, data.date_end_end_validity]);
+    }
+
     const inactives = await contractQueryInactives.fetch();
-    console.log(inactives.toJSON().length)
     return {
       inactivesQtd: inactives.toJSON().length,
       activesQtd: actives.toJSON().length,
